@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 type HomeScreenProps = {
   onExplorePress: () => void;
@@ -7,15 +8,24 @@ type HomeScreenProps = {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ onExplorePress }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>欢迎回来 👋</Text>
-      <Text style={styles.body}>
-        这是一个使用 react-native-bottom-tabs 构建的原生底部导航示例。标签页由原生组件驱动，支持液态玻璃等系统动效。
-      </Text>
-      <Pressable onPress={onExplorePress} style={({ pressed }) => [styles.ctaButton, pressed && styles.ctaButtonPressed]}>
-        <Text style={styles.ctaText}>前往探索标签</Text>
-      </Pressable>
-    </View>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <Text style={styles.heading}>欢迎回来 👋</Text>
+        <Text style={styles.body}>
+          这是一个使用 react-native-bottom-tabs
+          构建的原生底部导航示例。标签页由原生组件驱动，支持液态玻璃等系统动效。
+        </Text>
+        <Pressable
+          onPress={onExplorePress}
+          style={({ pressed }) => [
+            styles.ctaButton,
+            pressed && styles.ctaButtonPressed,
+          ]}
+        >
+          <Text style={styles.ctaText}>前往探索标签</Text>
+        </Pressable>
+      </View>
+    </SafeAreaProvider>
   );
 };
 

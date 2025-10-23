@@ -1,6 +1,6 @@
 import React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
-import BottomTabs from 'react-native-bottom-tabs';
+import { ImageSourcePropType, StatusBar, useColorScheme } from 'react-native';
+import BottomTabs, { AppleIcon } from 'react-native-bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import DiscoverScreen from './src/screens/DiscoverScreen';
@@ -11,12 +11,30 @@ type TabRoute = {
   key: 'home' | 'discover' | 'profile';
   title: string;
   badge?: string;
+  focusedIcon?: ImageSourcePropType | AppleIcon;
+  unfocusedIcon?: ImageSourcePropType | AppleIcon;
 };
 
 const TAB_ROUTES: TabRoute[] = [
-  { key: 'home', title: '首页' },
-  { key: 'discover', title: '探索', badge: '3' },
-  { key: 'profile', title: '我的' },
+  {
+    key: 'home',
+    title: '首页',
+    focusedIcon: { sfSymbol: 'house.fill' },
+    unfocusedIcon: { sfSymbol: 'house' },
+  },
+  {
+    key: 'discover',
+    title: '探索',
+    badge: '3',
+    focusedIcon: { sfSymbol: 'magnifyingglass.circle.fill' },
+    unfocusedIcon: { sfSymbol: 'magnifyingglass.circle' },
+  },
+  {
+    key: 'profile',
+    title: '我的',
+    focusedIcon: { sfSymbol: 'person.crop.circle.fill' },
+    unfocusedIcon: { sfSymbol: 'person.crop.circle' },
+  },
 ];
 
 const App = () => {
@@ -62,7 +80,9 @@ const App = () => {
         tabBarActiveTintColor={isDarkMode ? '#4DA3FF' : '#0F62FE'}
         tabBarInactiveTintColor={isDarkMode ? '#9299A2' : '#6C6E78'}
         tabBarStyle={{ backgroundColor: isDarkMode ? '#141417' : '#FFFFFF' }}
-        rippleColor={isDarkMode ? 'rgba(77, 163, 255, 0.16)' : 'rgba(15, 98, 254, 0.14)'}
+        rippleColor={
+          isDarkMode ? 'rgba(77, 163, 255, 0.16)' : 'rgba(15, 98, 254, 0.14)'
+        }
         hapticFeedbackEnabled
         minimizeBehavior="never"
       />
